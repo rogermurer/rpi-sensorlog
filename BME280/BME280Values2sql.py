@@ -54,11 +54,17 @@ def read_config_file():
 
     return config
 
+def get_sea_level_pressure(pressure, altitude):
+    """ convert the absolute pressure value to sea level pressure"""
+    psea = pressure / pow(1.0 - altitude / 44330.0, 5.225)
+    return psea / (100.0)
+
 def main():
     """ Main function """
     config = read_config_file()
     db_config = config["psql"]
     sensors = config["sensors"]
+    altitude = float(config["misc"]["altitude"])
     sensor_values = {}
 
     sensor = BME280(mode=BME280_OSAMPLE_8)
@@ -68,6 +74,8 @@ def main():
             raw_value = sensor.read_humidity()
         elif sensor_type == "temp":
             raw_value = sensor.read_temperature()
+        elif sensor_type == "pres":
+            raw_value = get_sea_level_pressure(sensor.read_pressure(), altitude)
         else:
             break
         sensor_values.update({sensor_id: round(raw_value, 1)})

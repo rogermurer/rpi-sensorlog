@@ -1,0 +1,16 @@
+{
+    "psql":{
+        "host":"put-your-db-server-ip-here",
+        "db":"put-your-sensor-db-name-here",
+        "prt":"5432",
+        "user":"put-your-db-user-name-here",
+        "pwd":"put-your-db-password-here"
+    },
+
+    "sensors":{
+        "temp":"1",
+        "pressure":"2",
+        "humid":"3",
+        "wind":"4"
+    }
+}

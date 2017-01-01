@@ -10,7 +10,7 @@ I have some Rasperry Pis with sensors such as:
 * DS18B20S temperature sensors 
 * The [Adafruit BME280] (https://www.adafruit.com/product/2652) temperature, humidity and pressure sensor
 * The [Adafruit BMP085/BMP180] (https://www.adafruit.com/product/1603) pressure and temperature sensor
-* And finaly a [USB WDE 1 from elv.ch] (http://www.elv.ch/usb-wetterdaten-empfaenger-usb-wde1-komplettbausatz-1.html) which monitors my compi sensors
+* And finaly a [USB WDE 1 from elv.ch] (http://www.elv.ch/usb-wetterdaten-empfaenger-usb-wde1-komplettbausatz-1.html) which monitors my combi sensors
 
 This sensors are connected to different Rasperry Pis for measuring temperature, humidity around the house and also gathering data from my elv combi sensor in the garden.
 

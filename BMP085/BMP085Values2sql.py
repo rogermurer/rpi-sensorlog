@@ -40,8 +40,8 @@ def write_to_db(db_conf, sensor_values):
     cur = db_conn.cursor()
     for sensor_id, sensor_value in sensor_values.items():
         cur.execute(sql_str, (sensor_id, sensor_value, datetime.datetime.now()))
-        db_conn.commit()
 
+    db_conn.commit()
     cur.close()
     db_conn.close()
 
@@ -54,10 +54,15 @@ def read_config_file():
 
     return config
 
-def get_sea_level_pressure(pressure, altitude):
-    """ convert the absolute pressure value to sea level pressure"""
-    psea = pressure / pow(1.0 - altitude / 44330.0, 5.225)
-    return psea / (100.0)
+def get_sea_level_pressure(pres, temp, alt):
+    """ convert the absolute pressure value to sea level pressure
+    soure: http://keisan.casio.com/exec/system/1224575267
+    """
+    psea = pres * pow(1.0 - ((0.0065 * alt) / (temp + (0.0065 * alt) + 273.15)), -5.257)
+
+    # pascal to hecto pascal
+    psea = psea / 100.0
+    return psea
 
 def main():
     """Main routine to read sensor data and write the values to the database"""
@@ -71,7 +76,9 @@ def main():
 
     for sensor_type, sensor_id in sensors.items():
         if sensor_type == "pres":
-            raw_value = get_sea_level_pressure(sensor.read_pressure(), altitude)
+            temp = float(sensor.read_temperature()) * 0.978
+            raw_value = get_sea_level_pressure(float(sensor.read_pressure()),
+                                               temp, altitude)
         elif sensor_type == "temp":
             raw_value = sensor.read_temperature() * 0.978
         else:

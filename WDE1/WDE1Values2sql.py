@@ -39,9 +39,9 @@ def write_to_db(db_conf, sensor_values):
     cur = db_conn.cursor()
     for sensor_id, sensor_value in sensor_values.items():
         cur.execute(sql_str, (sensor_id, sensor_value, datetime.datetime.now()))
-        db_conn.commit()
 
-    cur.close()
+    db_conn.commit()
+    cur.close()    
     db_conn.close()
 
 def read_config_file():

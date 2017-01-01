@@ -82,6 +82,7 @@ def get_config_values(db_conf, device_type):
     cur = db_conn.cursor()
     cur.execute(sql_str, [device_type, ])
     config_values = cur.fetchall()
+    db_conn.commit()    
     cur.close()
     db_conn.close()
     return config_values
@@ -101,11 +102,10 @@ def get_sensor_values(db_conf, device_type):
                ) as rows \
                where row_number = 1"
 
-    time2 = datetime.datetime.now()
-    time1 = time2 - datetime.timedelta(minutes=5)
     cur = db_conn.cursor()
     cur.execute(sql_str, [device_type, ])
     sensor_values = cur.fetchall()
+    db_conn.commit()
     cur.close()
     db_conn.close()
     return sensor_values

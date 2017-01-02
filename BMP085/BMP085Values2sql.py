@@ -75,14 +75,16 @@ def main():
     sensor = BMP085.BMP085()
 
     for sensor_type, sensor_id in sensors.items():
+        temp = sensor.read_temperature()
+
         if sensor_type == "pres":
-            temp = float(sensor.read_temperature()) * 0.978
-            raw_value = get_sea_level_pressure(float(sensor.read_pressure()),
+            raw_value = get_sea_level_pressure(sensor.read_pressure(),
                                                temp, altitude)
         elif sensor_type == "temp":
-            raw_value = sensor.read_temperature() * 0.978
+            raw_value = temp
         else:
             break
+            
         sensor_values.update({sensor_id: round(raw_value, 1)})
 
     write_to_db(db_config, sensor_values)

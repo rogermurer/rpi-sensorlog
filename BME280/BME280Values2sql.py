@@ -75,14 +75,15 @@ def main():
     sensor = BME280(mode=BME280_OSAMPLE_8)
 
     for sensor_type, sensor_id in sensors.items():
+        # Allways read temperature first, since pressure and humidity
+        # are only accurate if temperature is allready read
+        temp = sensor.read_temperature()
         if sensor_type == "humid":
             raw_value = sensor.read_humidity()
         elif sensor_type == "temp":
-            raw_value = sensor.read_temperature()
+            raw_value = temp
         elif sensor_type == "pres":
-            # read temp first to prevent faulty pressure reading
-            temp = float(sensor.read_temperature())
-            raw_value = get_sea_level_pressure(float(sensor.read_pressure()),
+            raw_value = get_sea_level_pressure(sensor.read_pressure(),
                                                temp, altitude)
         else:
             break

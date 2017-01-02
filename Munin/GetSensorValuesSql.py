@@ -82,7 +82,7 @@ def get_config_values(db_conf, device_type):
     cur = db_conn.cursor()
     cur.execute(sql_str, [device_type, ])
     config_values = cur.fetchall()
-    db_conn.commit()    
+    db_conn.commit()
     cur.close()
     db_conn.close()
     return config_values

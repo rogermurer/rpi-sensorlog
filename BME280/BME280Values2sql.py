@@ -54,12 +54,8 @@ def read_config_file():
 
     return config
 
-def get_sea_level_pressure(pres, temp, alt):
-    """ convert the absolute pressure value to sea level pressure
-    soure: http://keisan.casio.com/exec/system/1224575267
-    """
-    psea = pres * pow(1.0 - ((0.0065 * alt) / (temp + (0.0065 * alt) + 273.15)), -5.257)
-
+def get_sea_level_pressure(pres, alt):
+    psea = pres / pow(1.0 - alt / 44330.0, 5.225)
     # pascal to hecto pascal
     psea = psea / 100.0
     return psea
@@ -72,7 +68,7 @@ def main():
     altitude = float(config["misc"]["altitude"])
     sensor_values = {}
 
-    sensor = BME280(mode=BME280_OSAMPLE_8)
+    sensor = BME280(mode=BME280_OSAMPLE_16)
 
     for sensor_type, sensor_id in sensors.items():
         # Allways read temperature first, since pressure and humidity
@@ -83,8 +79,7 @@ def main():
         elif sensor_type == "temp":
             raw_value = temp
         elif sensor_type == "pres":
-            raw_value = get_sea_level_pressure(sensor.read_pressure(),
-                                               temp, altitude)
+            raw_value = get_sea_level_pressure(sensor.read_pressure(), altitude)
         else:
             break
         sensor_values.update({sensor_id: round(raw_value, 1)})

@@ -1,0 +1,13 @@
+{
+    "psql":{
+        "host":"put-your-db-server-ip-here",
+        "db":"put-your-sensor-db-name-here",
+        "prt":"5432",
+        "user":"put-your-db-user-name-here",
+        "pwd":"put-your-db-password-here"
+    },
+
+    "sensors":{
+        "put-your-sensor-db-id-here":"/sys/class/thermal/thermal_zone0/temp"
+    }
+}

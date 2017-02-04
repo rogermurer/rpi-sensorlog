@@ -17,7 +17,7 @@ elif [ "$1" == "config" ]; then
      echo "graph_info Zeigt die Windgeschwindigkeit in km/h"
      echo "graph_category Umgebungswerte"
      echo "graph_scale no"
-     /usr/local/bin/rpi-sensors/GetSensorValuesSql.py -t wind -c
+     /usr/local/bin/rpi-sensors/GetSensorValuesSql.py -t wind -g 1 -c
 else
-    /usr/local/bin/rpi-sensors/GetSensorValuesSql.py -t wind
+    /usr/local/bin/rpi-sensors/GetSensorValuesSql.py -t wind -g 1
 fi

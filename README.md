@@ -66,6 +66,13 @@ After that you shoud be able to setup your loging machines for the different sen
 
     */5 * * * * root test -x /usr/local/bin/WDE1/WDE1Values2sql.py && /usr/local/bin/WDE1/WDE1Values2sql.py
 
+### Pi CPU temperature
+* Copy the RPICpuTemp folder to /usr/local/bin/
+* Move or copy the config-dist.json to config.json and fill in the fields
+* Create a file in /etc/cron.d/ with the following content:
+
+    */5 * * * * root test -x /usr/local/bin/RPICpuTemp/RPICPUTemp2sql.py && /usr/local/bin/RPICpuTemp/RPICPUTemp.py
+
 ### Machine where munin-server is installed
 * Copy the Munin folder to /usr/local/bin/
 * Move or copy the config-dist.json to config.json and fill in the fields

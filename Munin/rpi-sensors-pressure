@@ -16,7 +16,7 @@ elif [ "$1" == "config" ]; then
      echo "graph_scale no"
      echo "graph_vlabel Druck in hPa"
      echo "graph_category Umgebungswerte"
-     /usr/local/bin/rpi-sensors/GetSensorValuesSql.py -t pressure -c
+     /usr/local/bin/rpi-sensors/GetSensorValuesSql.py -t pressure -g 1 -c
 else
-     /usr/local/bin/rpi-sensors/GetSensorValuesSql.py -t pressure
+     /usr/local/bin/rpi-sensors/GetSensorValuesSql.py -t pressure -g 1
 fi

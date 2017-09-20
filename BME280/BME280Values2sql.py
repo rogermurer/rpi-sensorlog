@@ -68,7 +68,7 @@ def main():
     altitude = float(config["misc"]["altitude"])
     sensor_values = {}
 
-    sensor = BME280(mode=BME280_OSAMPLE_16)
+    sensor = BME280(p_mode=BME280_OSAMPLE_8,t_mode=BME280_OSAMPLE_2,h_mode=BME280_OSAMPLE_1)
 
     for sensor_type, sensor_id in sensors.items():
         # Allways read temperature first, since pressure and humidity

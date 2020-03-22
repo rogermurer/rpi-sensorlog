@@ -42,7 +42,7 @@ After that you shoud be able to setup your loging machines for the different sen
     */5 * * * * root test -x /usr/local/bin/1Wire/DSTemp2sql.py && /usr/local/bin/1Wire/DSTemp2sql.py
 
 ### Pi with BME280 sensor
-* Install a BME280 sensor ([Adafruit instructions] (https://github.com/adafruit/Adafruit_Python_BME280))
+* Install a BME280 sensor ([Adafruit instructions] (https://github.com/adafruit/Adafruit_CircuitPython_BME280))
 * Copy the BME280 folder to /usr/local/bin/
 * Move or copy the config-dist.json to config.json and fill in the fields
 * Create a file in /etc/cron.d/ with the following content:

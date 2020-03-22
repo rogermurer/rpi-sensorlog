@@ -14,9 +14,10 @@ import datetime
 
 import psycopg2
 import json
-
-from Adafruit_BME280 import *
-
+import board
+import digitalio
+import busio
+import adafruit_bme280
 
 def open_db(db_name, user, host, port, pwd):
     """Try to open a connection to postgresql and return connection object"""
@@ -68,18 +69,19 @@ def main():
     altitude = float(config["misc"]["altitude"])
     sensor_values = {}
 
-    sensor = BME280(p_mode=BME280_OSAMPLE_8,t_mode=BME280_OSAMPLE_2,h_mode=BME280_OSAMPLE_1)
+    i2c = busio.I2C(board.SCL, board.SDA)
+    bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
 
     for sensor_type, sensor_id in sensors.items():
         # Allways read temperature first, since pressure and humidity
         # are only accurate if temperature is allready read
-        temp = sensor.read_temperature()
+        temp = bme280.temperature
         if sensor_type == "humid":
-            raw_value = sensor.read_humidity()
+            raw_value = bme280.humidity
         elif sensor_type == "temp":
             raw_value = temp
         elif sensor_type == "pres":
-            raw_value = get_sea_level_pressure(sensor.read_pressure(), altitude)
+            raw_value = get_sea_level_pressure(bme280.pressure, altitude)
         else:
             break
         sensor_values.update({sensor_id: round(raw_value, 1)})

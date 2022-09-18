@@ -17,7 +17,7 @@ import json
 import board
 import digitalio
 import busio
-import adafruit_bme280
+from adafruit_bme280 import basic as adafruit_bme280
 
 def open_db(db_name, user, host, port, pwd):
     """Try to open a connection to postgresql and return connection object"""
@@ -69,7 +69,7 @@ def main():
     altitude = float(config["misc"]["altitude"])
     sensor_values = {}
 
-    i2c = busio.I2C(board.SCL, board.SDA)
+    i2c = board.I2C()
     bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
 
     for sensor_type, sensor_id in sensors.items():

@@ -57,6 +57,22 @@ After that you shoud be able to setup your loging machines for the different sen
 
     */5 * * * * root test -x /usr/local/bin/BMP085/BME085Values2sql.py && /usr/local/bin/BMP085/BMP085Values2sql.py
 
+### Pi with Sense-HAT sensor
+* Install a Sense-HAT (Raspberry Pi instructions (https://www.raspberrypi.com/documentation/accessories/sense-hat.html))
+* Copy the SenseHat folder to /usr/local/bin/
+* Move or copy the config-dist.json to config.json and fill in the fields
+* Create a file in /etc/cron.d/ with the following content:
+
+    */5 * * * * root test -x /usr/local/bin/SenseHat/SenseHatValues2sql.py && /usr/local/bin/SenseHat/SenseHatValues2sql.py    
+
+### Pi with AHT20 sensor
+* Install a AHT20 sensor (Adafruit instructions (https://learn.adafruit.com/adafruit-aht20))
+* Copy the AHT20 folder to /usr/local/bin/
+* Move or copy the config-dist.json to config.json and fill in the fields
+* Create a file in /etc/cron.d/ with the following content:
+
+    */5 * * * * root test -x /usr/local/bin/AHT20/AHT20Values2sql.py && /usr/local/bin/AHT20/AHT20Values2sql.py    
+
 ### Pi or other Linux machine with USB-WDE1 dongle
 * Connect the USB-WDE1 dongle to a usb port
 * Install python3-serial package
@@ -71,7 +87,7 @@ After that you shoud be able to setup your loging machines for the different sen
 * Move or copy the config-dist.json to config.json and fill in the fields
 * Create a file in /etc/cron.d/ with the following content:
 
-    */5 * * * * root test -x /usr/local/bin/RPICpuTemp/RPICPUTemp2sql.py && /usr/local/bin/RPICpuTemp/RPICPUTemp.py
+    */5 * * * * root test -x /usr/local/bin/RPICpuTemp/RPICPUTemp2sql.py && /usr/local/bin/RPICpuTemp/RPICPUTemp2sql.py
 
 ### Machine where munin-server is installed
 * Copy the Munin folder to /usr/local/bin/

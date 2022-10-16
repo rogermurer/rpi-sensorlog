@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ This script reads the temperature and humidity values from a RPI Sense Hat
-sensor using the Adafruit_BME280 module, which has to reside in the same
+sensor using the Adafruit_AHT20 module, which has to reside in the same
 directory as this script.
 The configuration is read from a file called config.json residing in the
 scrpits path. A config-dist.jason is provided, copy it to config.json and
@@ -63,11 +63,10 @@ def main():
     sensor = adafruit_ahtx0.AHTx0(board.I2C())
 
     for sensor_type, sensor_id in sensors.items():
-        temp = sense.get_temperature_from_pressure()
         if sensor_type == "humid":
-            raw_value = sensor.relative_humidity()
+            raw_value = sensor.relative_humidity
         elif sensor_type == "temp":
-            raw_value = sensor.temperature()
+            raw_value = sensor.temperature
         else:
             break
         sensor_values.update({sensor_id: round(raw_value, 1)})

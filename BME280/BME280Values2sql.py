@@ -77,7 +77,7 @@ def main():
         # are only accurate if temperature is allready read
         temp = bme280.temperature
         if sensor_type == "humid":
-            raw_value = bme280.humidity
+            raw_value = bme280.relative_humidity
         elif sensor_type == "temp":
             raw_value = temp
         elif sensor_type == "pres":

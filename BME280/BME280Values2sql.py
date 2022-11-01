@@ -71,13 +71,15 @@ def main():
     bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
 
     for sensor_type, sensor_id in sensors.items():
-        # Allways read temperature first, since pressure and humidity
-        # are only accurate if temperature is allready read
-        temp = bme280.temperature
+        # Always read all values atleast once, before 
+        # taking the real measurement (according to adafruit)
+        raw_value = bme280.temperature
+        raw_value = bme280.relative_humidity
+        raw_value = bme280.pressure     
         if sensor_type == "humid":
             raw_value = bme280.relative_humidity
         elif sensor_type == "temp":
-            raw_value = temp
+            raw_value = bme280.temperature
         elif sensor_type == "pres":
             raw_value = get_sea_level_pressure(bme280.pressure, altitude)
         else:

@@ -57,8 +57,6 @@ def read_config_file():
 
 def get_sea_level_pressure(pres, alt):
     psea = pres / pow(1.0 - alt / 44330.0, 5.225)
-    # pascal to hecto pascal
-    psea = psea / 100.0
     return psea
 
 def main():
